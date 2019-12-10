@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import './widgets/chart.dart';
 import './widgets/transaction_list.dart';
 import './widgets/new_transaction.dart';
 import './models/transaction.dart';
@@ -44,7 +45,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
+    Transaction(id: 't1', title: 'New shoes', amount: 69.99, date: DateTime.now()),
+    Transaction(id: 't2', title: 'Groceries', amount: 19.99, date: DateTime.now()),
+    Transaction(id: 't3', title: 'Steam', amount: 59.99, date: DateTime.now()),
+    Transaction(id: 't4', title: 'Origin', amount: 87.54, date: DateTime.now()),
+    Transaction(id: 't5', title: 'Uplay', amount: 45.95, date: DateTime.now()),
+    Transaction(id: 't6', title: 'Food', amount: 95.25, date: DateTime.now()),
+    Transaction(id: 't7', title: 'Rappi', amount: 63.33, date: DateTime.now()),
   ];
+
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((transaction) => transaction.date.isAfter(DateTime.now().subtract(Duration(days: 7)))).toList();
+  }
 
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
@@ -80,14 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Card(
-              color: Colors.blue,
-              elevation: 5,
-              child: Container(
-                width: double.infinity,
-                child: Text('CHART'),
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_userTransactions),
           ],
         ),
