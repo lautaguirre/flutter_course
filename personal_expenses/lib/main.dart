@@ -22,6 +22,9 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
+          button: TextStyle(
+            color: Colors.white
+          ),
         ),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
@@ -45,7 +48,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(id: 't1', title: 'New shoes', amount: 69.99, date: DateTime.now()),
+    Transaction(id: 't1', title: 'New shoes', amount: 1515169.99, date: DateTime.now()),
     Transaction(id: 't2', title: 'Groceries', amount: 19.99, date: DateTime.now()),
     Transaction(id: 't3', title: 'Steam', amount: 59.99, date: DateTime.now()),
     Transaction(id: 't4', title: 'Origin', amount: 87.54, date: DateTime.now()),
@@ -72,9 +75,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _startAddNewTransaction(BuildContext context) {
-    showModalBottomSheet(context: context, builder: (_) {
-      return NewTransaction(_addNewTransaction);
-    });
+    showModalBottomSheet(
+      context: context,
+      builder: (_) {
+        return NewTransaction(_addNewTransaction);
+      }
+    );
   }
 
   @override
